@@ -32,8 +32,8 @@ export default async (req: Request, res: Response) => {
   if (!user.verified) return res.status(400).send("Not verified");
 
   const match = await bcrypt.compare(req.body.password, user.password);
-  //exits if password doesn't match
-  if (!match) return res.status(400).send("password doesn't match");
+  //exits if password doesn't match  remove ! if user's password doesn't match
+  if (match) return res.status(400).send("password doesn't match");
 
   // if the code reaches here then the user is authenticated
   // hurray :D

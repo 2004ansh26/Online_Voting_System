@@ -19,13 +19,14 @@ const Start = () => {
   const [error, setError] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [info, setInfo] = useState<string>("");
+  const [timeoutValue, setTimeoutValue] = useState<number>(0); // State to store the timeout value
 
   const candidateField = useRef<HTMLInputElement>(null);
   const candidateInfoField = useRef<HTMLInputElement>(null);
 
   return (
     <div className="form-container">
-      {error !== "" ? <div className="error-message">{error}</div> : null}
+      {error !== "" && <div className="error-message">{error}</div>}
 
       <Formik
         initialValues={{
@@ -58,8 +59,8 @@ const Start = () => {
 
           if (candidatesError === "") {
             axios
-              .post("/polls/start", { name, description, candidates })
-              .then((_) => {
+              .post("/polls/start", { name, description, candidates, timeout: timeoutValue })
+              .then(() => {
                 window.location.reload();
               })
               .catch((err) => {
@@ -80,7 +81,6 @@ const Start = () => {
                 placeholder="Poll Name"
                 {...getFieldProps("name")}
               />
-
               <div className="form-error-text">
                 {touched.name && errors.name ? errors.name : null}
               </div>
@@ -93,25 +93,19 @@ const Start = () => {
                 placeholder="Poll Description"
                 {...getFieldProps("description")}
               />
-
               <div className="form-error-text">
-                {touched.description && errors.description
-                  ? errors.description
-                  : null}
+                {touched.description && errors.description ? errors.description : null}
               </div>
             </div>
 
-            {candidates.length !== 0 ? (
+            {candidates.length !== 0 && (
               <div className="candidates-container">
                 {candidates.map(({ name, info }, index) => (
                   <div key={index} className="candidate-wrapper">
                     <span>{name}</span>
                     <span
                       onClick={() => {
-                        const newList = [...candidates];
-                        const i = newList.indexOf({ name, info });
-                        newList.splice(i, 1);
-
+                        const newList = candidates.filter((_, i) => i !== index);
                         setCandidates(newList);
                       }}
                       className="remove"
@@ -121,7 +115,7 @@ const Start = () => {
                   </div>
                 ))}
               </div>
-            ) : null}
+            )}
 
             <div className="input-container">
               <div className="add-candidate-wrapper">
@@ -133,26 +127,8 @@ const Start = () => {
                     setName(e.target.value);
                   }}
                 />
-
-                <button
-                  className=""
-                  type="button"
-                  onClick={() => {
-                    const newCandidate = { name, info };
-                    setCandidates([...candidates, newCandidate]);
-                    if (candidateField.current)
-                      candidateField.current.value = "";
-                    if (candidateInfoField.current)
-                      candidateInfoField.current.value = "";
-                  }}
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-
-            <div className="input-container">
-              <div className="add-candidate-wrapper">
+                ||<br/>
+                ||
                 <input
                   type="text"
                   placeholder="Candidate Info"
@@ -161,7 +137,27 @@ const Start = () => {
                     setInfo(e.target.value);
                   }}
                 />
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newCandidate = { name, info };
+                    setCandidates([...candidates, newCandidate]);
+                    if (candidateField.current) candidateField.current.value = "";
+                    if (candidateInfoField.current) candidateInfoField.current.value = "";
+                  }}
+                >
+                  Add
+                </button>
               </div>
+            </div>
+
+            <div className="input-container">
+              <input
+                type="number"
+                placeholder="Timeout (in minutes)"
+                value={timeoutValue}
+                onChange={(e) => setTimeoutValue(parseInt(e.target.value))}
+              />
             </div>
 
             <button className="login-button button-primary" type="submit">

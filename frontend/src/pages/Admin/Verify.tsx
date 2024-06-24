@@ -29,6 +29,7 @@ const Verify = () => {
         delete {name}
       </button>
     </div>
+    
   );
 };
 

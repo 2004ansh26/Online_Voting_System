@@ -11,7 +11,9 @@ import ProfilePage from "../pages/User/Profile";
 import Default from "../layouts/Default";
 import AdminUsersPage from "../pages/Admin/Users";
 import AdminVerifyPage from "../pages/Admin/Verify";
-
+import InsertUser from "../pages/Admin/InsertUser";
+import SearchUser from "../pages/Admin/SearchUser";
+import ManageCandidate from "../pages/Admin/ManageCandidate";
 export default () => {
   const authContext = useContext(AuthContext);
 
@@ -22,9 +24,13 @@ export default () => {
       // if the user is authenticated then
 
       const adminMenu = [
-        { name: "Home", link: "/" },
+        { name: "Election Page", link: "/" },
         { name: "Verify Users", link: "/users" },
         { name: "Profile", link: "/profile" },
+        { name: "Insert Users", link: "/insertuser" },
+        { name: "Manage Users", link: "/searchuser" },
+        // { name: "Manage Candidate", link: "/candidates" }
+
       ];
 
       const userMenu = [
@@ -36,13 +42,16 @@ export default () => {
         // if the user is admin
         return (
           <Default menu={adminMenu}>
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/users" element={<AdminUsersPage />} />
-              <Route path="/verify/:name/:id" element={<AdminVerifyPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-            </Routes>
-          </Default>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/users" element={<AdminUsersPage />} />
+            <Route path="/verify/:name/:id" element={<AdminVerifyPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/insertuser" element={<InsertUser />} /> {/* Make sure this line is present */}
+            <Route path="/searchuser" element={<SearchUser />} />
+            {/* <Route path="/candidates" element={<ManageCandidate />} /> */}
+          </Routes>
+        </Default>
         );
       } else {
         //  if the user in not admin

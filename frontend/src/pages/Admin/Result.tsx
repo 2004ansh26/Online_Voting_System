@@ -24,18 +24,18 @@ const Result = () => {
   if (loading) return <div></div>;
 
   return (
-    <Panel name={data.name} description={data.description}>
-      <>
-        <Chart votes={data.votes} />
+<Panel name={data.name} description={data.description}>
+  <>
+    <Chart votes={data.votes} />
+    <button
+      onClick={resetElection}
+      className="end-election-button button-primary"
+    >
+      Reset Election
+    </button>
+  </>
+</Panel>
 
-        <button
-          onClick={resetElection}
-          className="end-election-button button-primary"
-        >
-          Reset Election
-        </button>
-      </>
-    </Panel>
   );
 };
 

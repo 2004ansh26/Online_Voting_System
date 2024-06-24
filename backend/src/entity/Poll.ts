@@ -17,4 +17,6 @@ export class Poll extends BaseEntity {
 
   @OneToMany(() => Candidate, (candidate) => candidate.poll)
   candidates!: Candidate[];
+
+  
 }

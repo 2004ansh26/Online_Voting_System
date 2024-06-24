@@ -1,6 +1,6 @@
 import express from "express";
 
-import startController from "../controllers/polls/start";
+import startController,{getElectionStatus} from "../controllers/polls/start";
 import fetchController from "../controllers/polls/fetch";
 import statusController from "../controllers/polls/status";
 import endController from "../controllers/polls/end";
@@ -15,6 +15,7 @@ router.get("/status", statusController);
 router.get("/votes", votesController);
 
 router.post("/start", startController);
+router.get("/status", getElectionStatus);
 router.post("/end", endController);
 router.post("/reset", resetController);
 router.post("/check-voteability", checkVoteability);

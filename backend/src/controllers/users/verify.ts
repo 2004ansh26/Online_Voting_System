@@ -22,7 +22,6 @@ export default async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(400).send({ error });
   }
-
   user.verified = true;
 
   await User.save(user);
