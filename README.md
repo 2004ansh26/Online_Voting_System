@@ -1,8 +1,5 @@
 # Blockchain-Based-Voting-System
 
-# Watch the demo how it works here:
-https://www.youtube.com/watch?v=f22rJ1m7JBs&ab_channel=ROOMYAN
-
 
 <!-- Blockchain-Based Voting System -->
 Welcome to the Blockchain-Based Voting System repository! This project aims to provide a secure, transparent, and efficient voting platform utilizing blockchain technology.
