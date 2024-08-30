@@ -66,32 +66,40 @@ Truffle (version 5.x or higher)
 
 # Steps
 Clone the repository:
-
+```sh
 git clone https://github.com/2004ansh26/Online_Voting_System.git
-
+```
+```sh
 cd blockchain-voting-system
+```
 <!-- Install dependencies: -->
-
+```sh
 npm install
-# or
+```
+or
+```sh
 yarn install
-
+```
 
 <!-- Set up MySQL database: -->
 
 Create a new database named voting_system.
 Update the database connection settings in ormconfig.json.
 Compile and deploy smart contracts:
-
+```sh
 truffle compile
+```
+```sh
 truffle migrate
-
+```
 <!-- Start the development server: -->
-
+```sh
 npm start
-# or
+```
+or
+```sh
 yarn start
-
+```
 
 # Usage
 <!-- Admin -->
