@@ -114,3 +114,5 @@ View Results: Voters can view real-time results and the remaining time until the
 # License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Note
+To upload the bulk users use format as give in the file :- Book1.xlsx
